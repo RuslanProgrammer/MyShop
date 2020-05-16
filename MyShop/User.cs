@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyShop
 {
+    [Serializable]
     public class User : IAccount
     {
         public User(string name, string password)

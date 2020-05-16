@@ -1,4 +1,6 @@
-﻿namespace MyShop
+﻿using System;
+
+namespace MyShop
 {
     public interface IAccount
     {

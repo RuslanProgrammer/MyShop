@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MyShop
 {
+    [Serializable]
     public class Shop
     {
         public Shop()
@@ -17,6 +18,11 @@ namespace MyShop
         public List<User> Users { private set; get; }
         public List<Supply> Supplies { private set; get; }
         public List<Order> Orders { private set; get; }
+        public Admin admin = new Admin()
+        {
+            Name = "admin", 
+            Password = "admin"
+        };
 
         public void FillTest(int n)
         {
@@ -37,6 +43,20 @@ namespace MyShop
                 Orders.Add(new Order(k, Users[i], DateTime.Now - TimeSpan.FromDays(n - i)));
                 Users[i].History.AddRange(k);
             }
+        }
+
+        public void AddUser(User user)
+        {
+            Users.Add(user);
+        }
+        public void Save()
+        {
+            new Dao(this).Save();
+        }
+
+        public void Load()
+        {
+            new Dao(this).Load();
         }
     }
 }

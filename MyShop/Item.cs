@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MyShop
 {
+    [Serializable]
     public class Item
     {
         public Item(string name, string unit, decimal price, double available)

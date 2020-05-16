@@ -1,5 +1,8 @@
-﻿namespace MyShop
+﻿using System;
+
+namespace MyShop
 {
+    [Serializable]
     public class Portion
     {
         public double Amount { set; get; }

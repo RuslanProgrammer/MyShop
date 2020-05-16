@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MyShop
 {
+    [Serializable]
     public class Order
     {
         public Order(List<Portion> portions, User user, DateTime? t = null)

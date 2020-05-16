@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MyShop
 {
+    [Serializable]
     public class Supply
     {
         public Supply(List<Portion> portions)
