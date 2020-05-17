@@ -47,6 +47,7 @@
             this.LoginBox.Size = new System.Drawing.Size(100, 21);
             this.LoginBox.TabIndex = 0;
             this.LoginBox.Text = "User_1";
+            this.LoginBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.signIn_KeyDown);
             // 
             // loginText
             // 
@@ -76,6 +77,8 @@
             this.PasswordBox.Size = new System.Drawing.Size(100, 21);
             this.PasswordBox.TabIndex = 4;
             this.PasswordBox.Text = "1234";
+            this.PasswordBox.UseSystemPasswordChar = true;
+            this.PasswordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.signIn_KeyDown);
             // 
             // signIn
             // 

@@ -9,22 +9,24 @@ namespace LoginForm
 {
     public partial class LoginForm : Form
     {
-        private Shop shop;
+        private Shop _shop;
+        private bool changed = false;
         public LoginForm()
         {
-            shop = new Shop();
-            shop.Load();
+            _shop = new Shop();
+            _shop.Load();
             InitializeComponent();
         }
 
         private void signUp_Click(object sender, EventArgs e)
         {
-            var su = new SignUpForm(shop.Users, shop.admin);
+            var su = new SignUpForm(_shop.Users, _shop.admin);
             if (su.ShowDialog() == DialogResult.OK)
             {
-                shop.AddUser(su.res);
+                _shop.AddUser(su.res);
                 LoginBox.Text = su.res.Name;
                 PasswordBox.Text = su.res.Password;
+                changed = true;
             }
         }
 
@@ -36,38 +38,42 @@ namespace LoginForm
 
         private void signIn_Click(object sender, EventArgs e)
         {
-            if (DialogResult == DialogResult.OK)
-            {
-                CheckAdmin();
+            if(!CheckAdmin())
                 CheckUser();
-            }
-            else
-            {
-                shop.Save();
-            }
         }
 
-        private void CheckAdmin()
+        private bool CheckAdmin()
         {
-            if (LoginBox.Text == shop.admin.Name && PasswordBox.Text == shop.admin.Password)
+            if (LoginBox.Text == _shop.admin.Name && PasswordBox.Text == _shop.admin.Password)
             {
-                var adminApp = new AdminForm();
-                adminApp.Show();
+                var adminApp = new AdminForm(_shop);
                 this.Hide();
+                adminApp.ShowDialog();
+                if (adminApp.ToLogin == true)
+                    this.Show();
+                else
+                    this.Close();
+                return true;
             }
+            return false;
         }
 
         private void CheckUser()
         {
-            foreach (var shopUser in shop.Users)
+            foreach (var shopUser in _shop.Users)
             {
                 if (LoginBox.Text == shopUser.Name)
                 {
                     if (PasswordBox.Text == shopUser.Password)
                     {
-                        var userApp = new UserForm();
-                        userApp.Show();
+                        var userApp = new UserForm(_shop);
                         this.Hide();
+                        userApp.ShowDialog();
+                        if(userApp.ToLogin == true)
+                            this.Show();
+                        else
+                            this.Close();
+                        return;
                     }
                     PasswordBox.BackColor = Color.Red;
                 }
@@ -77,6 +83,14 @@ namespace LoginForm
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(changed)
+                _shop.Save();
+        }
+
+        private void signIn_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(Keys.Enter == e.KeyCode)
+                signIn_Click(sender, EventArgs.Empty);
         }
     }
 }
