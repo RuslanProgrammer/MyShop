@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace MyShop
 {
@@ -29,9 +31,10 @@ namespace MyShop
             Items.Clear();
             Users.Clear();
             Orders.Clear();
+            var defImg = new Bitmap(Path.GetFullPath("item.png"));
             for (int i = 0; i < n; i++)
             {
-                Items.Add(new Item($"Product_{i}", "kg", i + 1, (i + 1)%10 * 200));
+                Items.Add(new Item($"Product_{i}", ((Unit)(i%2)).ToString(), i + 1, (decimal)Math.Round(Math.Pow(n + i, 1.6), 3), defImg));
                 Users.Add(new User($"User_{i}", "1234"));
             }
 
@@ -39,16 +42,16 @@ namespace MyShop
             {
                 var k = new List<Portion>(10);
                 for (int j = 0; j < 10; j++)
-                    k.Add(new Portion {Item = Items[(i + j) % n], Amount = i%15 + j + 1 + i%(j+1)});
+                    k.Add(new Portion {Item = Items[i % n], Amount = 1 + (i * j)});
                 Orders.Add(new Order(k, Users[i], DateTime.Now - TimeSpan.FromDays(n - i)));
                 Users[i].History.AddRange(k);
             }
         }
 
-        public void AddUser(User user)
-        {
-            Users.Add(user);
-        }
+        public void AddUser(User user) => Users.Add(user);
+
+        public void AddItem(Item item) => Items.Add(item);
+
         public void Save()
         {
             new Dao(this).Save();
