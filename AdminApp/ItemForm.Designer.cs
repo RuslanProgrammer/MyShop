@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.NameLabel = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.UnitLabel = new System.Windows.Forms.Label();
@@ -40,6 +41,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AvailableLabel = new System.Windows.Forms.Label();
             this.AvaliableUpDown = new System.Windows.Forms.NumericUpDown();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvaliableUpDown)).BeginInit();
@@ -199,6 +201,7 @@
             this.Name = "ItemForm";
             this.Text = "Item Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemForm_FormClosing);
+            this.Load += new System.EventHandler(this.ItemForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvaliableUpDown)).EndInit();
@@ -221,5 +224,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label AvailableLabel;
         private System.Windows.Forms.NumericUpDown AvaliableUpDown;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

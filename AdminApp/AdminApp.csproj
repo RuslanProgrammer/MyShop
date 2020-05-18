@@ -35,6 +35,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>item.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +58,12 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChooseItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChooseItem.Designer.cs">
+      <DependentUpon>ChooseItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,8 +71,17 @@
       <DependentUpon>ItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplyForm.Designer.cs">
+      <DependentUpon>SupplyForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChooseItem.resx">
+      <DependentUpon>ChooseItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemForm.resx">
       <DependentUpon>ItemForm.cs</DependentUpon>
@@ -78,9 +96,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SupplyForm.resx">
+      <DependentUpon>SupplyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\AdminForm.datasource" />
     <None Include="Properties\DataSources\MyShop.Admin.datasource" />
     <None Include="Properties\DataSources\MyShop.Item.datasource" />
+    <None Include="Properties\DataSources\MyShop.Order.datasource" />
     <None Include="Properties\DataSources\MyShop.Shop.datasource" />
+    <None Include="Properties\DataSources\MyShop.Supply.datasource" />
+    <None Include="Properties\DataSources\SupplyForm.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\item.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="item.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

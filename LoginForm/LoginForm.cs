@@ -15,6 +15,7 @@ namespace LoginForm
         {
             _shop = new Shop();
             _shop.Load();
+            _shop.FillTest(100);
             InitializeComponent();
         }
 
@@ -66,7 +67,7 @@ namespace LoginForm
                 {
                     if (PasswordBox.Text == shopUser.Password)
                     {
-                        var userApp = new UserForm(_shop);
+                        var userApp = new UserForm(_shop, shopUser);
                         this.Hide();
                         userApp.ShowDialog();
                         if(userApp.ToLogin == true)

@@ -17,7 +17,7 @@ namespace MyShop
             Image = image;
         }
 
-        private static int _total = 0;
+        public static int _total = 0;
         public int Id { set; get; }
         public string Name { set; get; }
         public string Unit { set; get; }

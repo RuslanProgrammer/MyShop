@@ -14,12 +14,14 @@ namespace MyShop
             Users = new List<User>();
             Supplies = new List<Supply>();
             Orders = new List<Order>();
+            HistorySupplies = new List<Supply>();
         }
 
         public List<Item> Items { private set; get; }
         public List<User> Users { private set; get; }
         public List<Supply> Supplies { private set; get; }
         public List<Order> Orders { private set; get; }
+        public List<Supply> HistorySupplies { private set; get; }
         public Admin admin = new Admin()
         {
             Name = "admin", 
@@ -31,10 +33,13 @@ namespace MyShop
             Items.Clear();
             Users.Clear();
             Orders.Clear();
+            Supplies.Clear();
+            HistorySupplies.Clear();
             var defImg = new Bitmap(Path.GetFullPath("item.png"));
             for (int i = 0; i < n; i++)
             {
                 Items.Add(new Item($"Product_{i}", ((Unit)(i%2)).ToString(), i + 1, (decimal)Math.Round(Math.Pow(n + i, 1.6), 3), defImg));
+
                 Users.Add(new User($"User_{i}", "1234"));
             }
 
@@ -43,23 +48,24 @@ namespace MyShop
                 var k = new List<Portion>(10);
                 for (int j = 0; j < 10; j++)
                     k.Add(new Portion {Item = Items[i % n], Amount = 1 + (i * j)});
+
                 Orders.Add(new Order(k, Users[i], DateTime.Now - TimeSpan.FromDays(n - i)));
+
+                Supplies.Add(new Supply(k, DateTime.Now - TimeSpan.FromDays(n - i)));
+
                 Users[i].History.AddRange(k);
             }
+            Supplies.Reverse();
         }
 
         public void AddUser(User user) => Users.Add(user);
 
         public void AddItem(Item item) => Items.Add(item);
+        public void AddSupply(Supply supply) => Supplies.Add(supply);
+        public void AddSupplyFirst(Supply supply) => Supplies.Insert(0, supply);
 
-        public void Save()
-        {
-            new Dao(this).Save();
-        }
+        public void Save() => new Dao(this).Save();
 
-        public void Load()
-        {
-            new Dao(this).Load();
-        }
+        public void Load() => new Dao(this).Load();
     }
 }

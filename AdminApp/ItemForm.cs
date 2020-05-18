@@ -107,6 +107,10 @@ namespace AdminApp
 
         private void Mark(Control c) => c.BackColor = Color.Red;
 
-        
+        private void ItemForm_Load(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(NameTextBox, "1<length<31, and not contain only numbers");
+            NameTextBox.Text = $"Product_{Item._total}";
+        }
     }
 }
