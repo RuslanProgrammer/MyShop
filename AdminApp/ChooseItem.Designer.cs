@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ItemsGridVieww = new System.Windows.Forms.DataGridView();
+            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.SaveItemButton = new System.Windows.Forms.Button();
@@ -38,10 +39,9 @@
             this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imageDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGridVieww)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemsGridVieww
@@ -68,8 +68,13 @@
             this.ItemsGridVieww.Size = new System.Drawing.Size(288, 357);
             this.ItemsGridVieww.TabIndex = 6;
             // 
+            // itemBindingSource
+            // 
+            this.itemBindingSource.DataSource = typeof(MyShop.Item);
+            // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.numericUpDown1.DecimalPlaces = 3;
             this.numericUpDown1.Location = new System.Drawing.Point(65, 368);
             this.numericUpDown1.Maximum = new decimal(new int[] {
@@ -84,6 +89,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 370);
             this.label1.Name = "label1";
@@ -93,6 +99,7 @@
             // 
             // SaveItemButton
             // 
+            this.SaveItemButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveItemButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.SaveItemButton.Location = new System.Drawing.Point(206, 366);
             this.SaveItemButton.Name = "SaveItemButton";
@@ -116,7 +123,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 75;
+            this.nameDataGridViewTextBoxColumn.Width = 57;
             // 
             // unitDataGridViewTextBoxColumn
             // 
@@ -124,7 +131,7 @@
             this.unitDataGridViewTextBoxColumn.HeaderText = "Unit";
             this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
             this.unitDataGridViewTextBoxColumn.ReadOnly = true;
-            this.unitDataGridViewTextBoxColumn.Width = 50;
+            this.unitDataGridViewTextBoxColumn.Width = 57;
             // 
             // availableDataGridViewTextBoxColumn
             // 
@@ -132,7 +139,7 @@
             this.availableDataGridViewTextBoxColumn.HeaderText = "Available";
             this.availableDataGridViewTextBoxColumn.Name = "availableDataGridViewTextBoxColumn";
             this.availableDataGridViewTextBoxColumn.ReadOnly = true;
-            this.availableDataGridViewTextBoxColumn.Width = 55;
+            this.availableDataGridViewTextBoxColumn.Width = 57;
             // 
             // imageDataGridViewImageColumn
             // 
@@ -142,11 +149,7 @@
             this.imageDataGridViewImageColumn.Name = "imageDataGridViewImageColumn";
             this.imageDataGridViewImageColumn.ReadOnly = true;
             this.imageDataGridViewImageColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.imageDataGridViewImageColumn.Width = 48;
-            // 
-            // itemBindingSource
-            // 
-            this.itemBindingSource.DataSource = typeof(MyShop.Item);
+            this.imageDataGridViewImageColumn.Width = 57;
             // 
             // ChooseItem
             // 
@@ -157,13 +160,16 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.ItemsGridVieww);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximumSize = new System.Drawing.Size(309, 434);
+            this.MinimumSize = new System.Drawing.Size(309, 434);
             this.Name = "ChooseItem";
             this.Text = "ChooseItem";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChooseItem_FormClosing);
             this.Load += new System.EventHandler(this.ChooseItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGridVieww)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

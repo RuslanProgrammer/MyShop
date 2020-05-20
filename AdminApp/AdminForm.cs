@@ -65,8 +65,15 @@ namespace AdminApp
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             shop.Load();
+            IsChanged = false;
             itemBindingSource.ResetBindings(false);
+            foreach (var shopSupply in shop.Supplies)
+            {
+                var temp = new { shopSupply.DateTimeEnd, shopSupply.Portions.Count };
+                SupplyList.Add(temp);
+            }
             supplyBindingSource.ResetBindings(false);
+            Form1_Load(sender, e);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

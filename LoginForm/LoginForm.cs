@@ -50,7 +50,7 @@ namespace LoginForm
                 var adminApp = new AdminForm(_shop);
                 this.Hide();
                 adminApp.ShowDialog();
-                if (adminApp.ToLogin == true)
+                if (adminApp.ToLogin)
                     this.Show();
                 else
                     this.Close();
@@ -70,7 +70,7 @@ namespace LoginForm
                         var userApp = new UserForm(_shop, shopUser);
                         this.Hide();
                         userApp.ShowDialog();
-                        if(userApp.ToLogin == true)
+                        if(userApp.ToLogin)
                             this.Show();
                         else
                             this.Close();

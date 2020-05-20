@@ -15,5 +15,6 @@ namespace MyShop
         public string Name { set; get; }
         public string Password { set; get; }
         public List<Portion> History = new List<Portion>();
+        public List<Portion> Basket = new List<Portion>();
     }
 }

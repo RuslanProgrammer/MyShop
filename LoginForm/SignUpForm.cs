@@ -44,7 +44,7 @@ namespace LoginForm
 
         private void CheckLogin(Control c, FormClosingEventArgs e)
         {
-            if (c.BackColor == Color.Red || loginBox.Text == res.Name && passwordBox.Text == res.Password)
+            if (c.BackColor == Color.Red || loginBox.Text == res.Name && passwordBox.Text == res.Password || loginBox.Text == res.Name)
             {
                 c.BackColor = Color.Red;
                 e.Cancel = true;
