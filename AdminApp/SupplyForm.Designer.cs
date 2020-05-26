@@ -50,7 +50,7 @@
             // TotalLabe
             // 
             this.TotalLabe.AutoSize = true;
-            this.TotalLabe.Location = new System.Drawing.Point(258, 144);
+            this.TotalLabe.Location = new System.Drawing.Point(258, 142);
             this.TotalLabe.Name = "TotalLabe";
             this.TotalLabe.Size = new System.Drawing.Size(13, 13);
             this.TotalLabe.TabIndex = 2;

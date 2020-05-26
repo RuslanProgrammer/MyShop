@@ -22,6 +22,8 @@ namespace AdminApp
             InitializeComponent();
             ItemsGridVieww.DataSource = lst;
             _supply = supply;
+            if (lst.Count <= 0)
+                SaveItemButton.Enabled = false;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e) => 

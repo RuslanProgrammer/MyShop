@@ -21,6 +21,8 @@ namespace UserApp
         {
             InitializeComponent();
             _items = items;
+            if (_items.Count <= 0)
+                SaveItemButton.Enabled = false;
         }
 
         public ChooseItem(List<Item> items, List<Portion> portions) : this(items)

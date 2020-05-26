@@ -2,6 +2,7 @@
 using MyShop;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using UserApp;
 
@@ -14,8 +15,10 @@ namespace LoginForm
         public LoginForm()
         {
             Shop = new Shop();
-            Shop.Load();
-            //Shop.FillTest(100);
+            if(!File.Exists("shop.bin"))
+                Shop.FillTest(100);
+            else 
+                Shop.Load();
             InitializeComponent();
         }
 

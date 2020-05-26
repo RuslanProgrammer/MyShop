@@ -21,7 +21,7 @@ namespace AdminApp
             _shop = shop;
             itemBindingSource.DataSource = shop.Items;
             foreach (var shopSupply in shop.Supplies)
-                _supplyList.Add(new { shopSupply.DateTimeEnd, shopSupply.Portions.Count });
+                _supplyList.Add(new {shopSupply.DateTimeEnd, shopSupply.Portions.Count });
             foreach (var shopSupply in shop.HistorySupplies)
                 _supplyList.Add(new { shopSupply.DateTimeEnd, shopSupply.Portions.Count });
             supplyBindingSource.DataSource = _supplyList;
@@ -152,7 +152,7 @@ namespace AdminApp
             {
                 _shop.AddSupplyFirst(supplyForm.Supply);
                 _supplyList.Insert(0, new { supplyForm.Supply.DateTimeEnd, supplyForm.Supply.Portions.Count });
-                supplyBindingSource.ResetBindings(false);
+                supplyBindingSource.ResetBindings(true);
                 _isChanged = true;
 
                 SuppliesGridView.Rows[0].Selected = true;
@@ -182,14 +182,17 @@ namespace AdminApp
             {
                 _shop.Supplies.RemoveAt(SuppliesGridView.CurrentRow.Index);
                 _supplyList.RemoveAt(SuppliesGridView.CurrentRow.Index);
-                supplyBindingSource.ResetBindings(false);
+                supplyBindingSource.ResetBindings(true);
                 _isChanged = true;
                 ColorSupply();
             }
         }
 
         private void ViewHelpToolStripMenuItem_Click(object sender, EventArgs e) =>
-            MessageBox.Show("Shop documentation\nLook how to use Shop to buy products in specification!");
+            MessageBox.Show("Add/Edit/Delete Items to shop.\n" +
+                            "Add/Edit/Delete Orders to replenish count of items.\n" +
+                            "Create Report to control availability.\n" +
+                            "Look more in specification!", "Help");
 
         private void gitHubToolStripMenuItem_Click(object sender, EventArgs e) =>
             System.Diagnostics.Process.Start("https://github.com/RuslanProgrammer/MyShop");

@@ -204,8 +204,11 @@ namespace UserApp
                     ItemsGridView.SelectedRows.Count > 0;
         }
 
-        private void gitHubToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://github.com/RuslanProgrammer/MyShop");
+        private void gitHubToolStripMenuItem_Click(object sender, EventArgs e) => 
+            System.Diagnostics.Process.Start("https://github.com/RuslanProgrammer/MyShop");
 
-        private void viewHelpToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("Shop documentation\nLook how to use Shop to buy products in specification!");
+        private void viewHelpToolStripMenuItem_Click(object sender, EventArgs e) =>
+            MessageBox.Show("Add/Edit/Delete Items to basket.\n" +
+                                "Look more in specification!", "Help");
     }
 }

@@ -113,6 +113,9 @@ namespace AdminApp
         private void Mark(Control c) =>
             c.BackColor = Color.Red;
 
-        private void button1_Click(object sender, EventArgs e) => new ChartP(Item.Price).ShowDialog();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Item != null) new ChartP(Item.Price).ShowDialog();
+        }
     }
 }
