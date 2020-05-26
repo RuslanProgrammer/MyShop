@@ -14,17 +14,47 @@ namespace AdminApp
     public partial class SupplyForm : Form
     {
         public Supply Supply;
-        private List<Item> lst;
-        public SupplyForm(List<Item> _lst)
+        private readonly List<Item> _lst;
+
+        public SupplyForm(List<Item> lst)
         {
             InitializeComponent();
-            lst = _lst;
+            _lst = lst;
             Supply = new Supply(new List<Portion>(), DateTime.Now);
             Deletebutton.Enabled = false;
             SaveButton.Enabled = false;
+            CheckAuto();
+            CreateSupplyTable();
+        }
+        public SupplyForm(Supply supply, List<Item> lst) : this(lst)
+        {
+            Supply = supply;
+            AddRow(supply);
+            Deletebutton.Enabled = true;
+            SaveButton.Enabled = true;
+            AutoButton.Enabled = false;
+        }
+        public SupplyForm(Supply supply)
+        {
+            InitializeComponent();
+            Supply = supply;
+            CreateSupplyTable();
+            AddRow(supply);
+            NewButton.Enabled = false;
+            Deletebutton.Enabled = false;
+            SaveButton.Enabled = false;
+            AutoButton.Enabled = false;
+        }
 
-            var t = new DataGridViewImageColumn();
-            t.ImageLayout = DataGridViewImageCellLayout.Zoom;
+        private void CheckAuto()
+        {
+            if (_lst.Select(x => x.Available < 500).Count(x => x) == 0)
+                AutoButton.Enabled = false;
+        }
+
+        private void CreateSupplyTable()
+        {
+            var t = new DataGridViewImageColumn {ImageLayout = DataGridViewImageCellLayout.Zoom};
             SupplyTable.Columns.Add(t);
             SupplyTable.Columns[0].HeaderText = "Img";
             SupplyTable.Columns.Add("Name", "Name");
@@ -35,39 +65,30 @@ namespace AdminApp
             SupplyTable.Columns[1].Width = 75;
             SupplyTable.Columns[2].Width = 50;
             SupplyTable.Columns[3].Width = 55;
-            SupplyTable.Columns[4].Width = 48;
-        }
-
-        public SupplyForm(Supply supply, List<Item> lst) : this(lst)
-        {
-            Supply = supply;
-            AddRow(supply);
-
-            Deletebutton.Enabled = true;
-            SaveButton.Enabled = true;
+            SupplyTable.Columns[4].Width = 62;
         }
 
         private void NewButton_Click(object sender, EventArgs e)
         {
-            var cf = new ChooseItem(lst, Supply);
+            var cf = new ChooseItem(_lst, Supply);
             if (cf.ShowDialog() == DialogResult.OK)
             {
                 bool flag = true;
                 foreach (var supplyPortion in Supply.Portions)
                 {
-                    if (supplyPortion.Item == cf.item)
+                    if (supplyPortion.Item == cf.Item)
                     {
-                        supplyPortion.Amount += cf.amount;
+                        supplyPortion.Amount += cf.Amount;
                         flag = false;
                         for (int i = 0; i < SupplyTable.RowCount; i++)
                         {
-                            if (SupplyTable.Rows[i].Cells[1].Value.ToString() == cf.item.Name)
+                            if (SupplyTable.Rows[i].Cells[1].Value.ToString() == cf.Item.Name)
                             {
                                 SupplyTable.Rows[i].Cells[2].Value =
-                                    (decimal) SupplyTable.Rows[i].Cells[2].Value + cf.amount;
+                                    (decimal) SupplyTable.Rows[i].Cells[2].Value + cf.Amount;
                                 SupplyTable.Rows[i].Cells[4].Value =
                                     (decimal) SupplyTable.Rows[i].Cells[4].Value +
-                                    cf.amount * cf.item.Price[cf.item.Price.Count - 1];
+                                    cf.Amount * cf.Item.Price[cf.Item.Price.Count - 1];
                                 break;
                             }
                         }
@@ -77,15 +98,16 @@ namespace AdminApp
 
                 if (flag)
                 {
-                    Supply.Portions.Add(new Portion() {Amount = cf.amount, Item = cf.item});
-                    var price = cf.item.Price[cf.item.Price.Count - 1];
-                    decimal cost = cf.amount * price;
-                    SupplyTable.Rows.Add(cf.item.Image, cf.item.Name, cf.amount, price, cost);
+                    Supply.Portions.Add(new Portion() {Amount = cf.Amount, Item = cf.Item});
+                    var price = cf.Item.Price[cf.Item.Price.Count - 1];
+                    decimal cost = cf.Amount * price;
+                    SupplyTable.Rows.Add(cf.Item.Image, cf.Item.Name, cf.Amount, price, cost);
                     Deletebutton.Enabled = true;
                     SaveButton.Enabled = true;
+                    AutoButton.Enabled = false;
                 }
 
-                TotalLabe.Text = Math.Round(Decimal.Parse(TotalLabe.Text) + cf.amount * cf.item.Price[cf.item.Price.Count - 1], 3).ToString();
+                TotalLabe.Text = Math.Round(Decimal.Parse(TotalLabe.Text) + cf.Amount * cf.Item.Price[cf.Item.Price.Count - 1], 3).ToString();
             }
         }
 
@@ -100,12 +122,7 @@ namespace AdminApp
             }
         }
 
-        private void SupplyForm_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Deletebutton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             var ask = MessageBox.Show($"Delete {SupplyTable.CurrentRow.Cells[1].Value} ?", "", MessageBoxButtons.YesNo);
             if (ask == DialogResult.Yes)
@@ -120,7 +137,24 @@ namespace AdminApp
             {
                 Deletebutton.Enabled = false;
                 SaveButton.Enabled = false;
+                CheckAuto();
             }
+        }
+
+        private void AutoButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in _lst)
+            {
+                if (item.Available < 500)
+                {
+                    Supply.Portions.Add(new Portion() {Amount = 500 - item.Available, Item = item});
+                    SupplyTable.Rows.Add(item.Image, item.Name, 500 - item.Available, item.Price[item.Price.Count - 1], item.Price[item.Price.Count - 1] * 500 - item.Available);
+                    TotalLabe.Text = Math.Round(Decimal.Parse(TotalLabe.Text) + (500 - item.Available) * item.Price[item.Price.Count - 1], 3).ToString();
+                }
+            }
+            Deletebutton.Enabled = true;
+            SaveButton.Enabled = true;
+            AutoButton.Enabled = false;
         }
     }
 }

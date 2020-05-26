@@ -13,31 +13,29 @@ namespace AdminApp
 {
     public partial class ChooseItem : Form
     {
-        public Item item;
-        public decimal amount;
-        private Supply supply;
-        public ChooseItem(List<Item> lst, Supply Supply)
+        public Item Item;
+        public decimal Amount;
+        private Supply _supply;
+
+        public ChooseItem(List<Item> lst, Supply supply)
         {
             InitializeComponent();
             ItemsGridVieww.DataSource = lst;
-            supply = Supply;
+            _supply = supply;
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e) => numericUpDown1.BackColor = Color.White;
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e) => 
+            numericUpDown1.BackColor = Color.White;
 
         private void SaveItemButton_Click(object sender, EventArgs e)
         {
-            if (item == null)
+            if (Item == null)
             {
-                item = ItemsGridVieww.SelectedRows[0].DataBoundItem as Item;
-                if (numericUpDown1.Value != (int) numericUpDown1.Value && item.Unit == "unit")
-                {
+                Item = ItemsGridVieww.SelectedRows[0].DataBoundItem as Item;
+                if (numericUpDown1.Value != (int) numericUpDown1.Value && Item.Unit == "unit")
                     numericUpDown1.BackColor = Color.Red;
-                }
                 else
-                {
-                    amount = numericUpDown1.Value;
-                }
+                    Amount = numericUpDown1.Value;
             }
 
         }
@@ -46,14 +44,14 @@ namespace AdminApp
         {
             if (DialogResult == DialogResult.OK)
             {
-                item = ItemsGridVieww.SelectedRows[0].DataBoundItem as Item;
-                if ((numericUpDown1.Value != (int) numericUpDown1.Value && item.Unit == "unit") ||numericUpDown1.Value == 0)
+                Item = ItemsGridVieww.SelectedRows[0].DataBoundItem as Item;
+                if ((numericUpDown1.Value != (int) numericUpDown1.Value && Item.Unit == "unit") ||numericUpDown1.Value == 0)
                 {
                     numericUpDown1.BackColor = Color.Red;
                     e.Cancel = true;
                 }
                 else
-                    amount = numericUpDown1.Value;
+                    Amount = numericUpDown1.Value;
             }
         }
 
@@ -61,11 +59,11 @@ namespace AdminApp
         {
             for (int i = 0; i < ItemsGridVieww.RowCount; i++)
             {
-                if ((decimal) ItemsGridVieww.Rows[i].Cells[3].Value < 500)
+                if ((decimal) ItemsGridVieww.Rows[i].Cells[2].Value < 500)
                 {
                     ItemsGridVieww.Rows[i].Cells[0].Style.BackColor = Color.RosyBrown;
                 }
-                else if ((decimal) ItemsGridVieww.Rows[i].Cells[3].Value < 1000)
+                else if ((decimal) ItemsGridVieww.Rows[i].Cells[2].Value < 1000)
                 {
                     ItemsGridVieww.Rows[i].Cells[0].Style.BackColor = Color.DarkGoldenrod;
                 }

@@ -9,14 +9,11 @@ namespace MyShop
         public Supply(List<Portion> portions, DateTime? t = null)
         {
             Portions = portions;
-            if (t == null)
-                DateTime = DateTime.Now;
-            else
-                DateTime = (DateTime)t;
+            DateTime = t ?? DateTime.Now;
         }
-        public List<Portion> Portions { private set; get; }
-        public DateTime DateTime { private set; get; }
 
+        public List<Portion> Portions { private set; get; }
+        public DateTime DateTime { set; get; }
         public DateTime DateTimeEnd => DateTime + TimeSpan.FromDays(2);
     }
 }

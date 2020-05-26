@@ -35,16 +35,17 @@
             this.UnitComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PriceUpDown = new System.Windows.Forms.NumericUpDown();
-            this.PictureBox = new System.Windows.Forms.PictureBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.ChangeImageButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AvailableLabel = new System.Windows.Forms.Label();
             this.AvaliableUpDown = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvaliableUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -62,6 +63,7 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(233, 20);
             this.NameTextBox.TabIndex = 2;
+            this.NameTextBox.Text = "Product";
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // UnitLabel
@@ -115,22 +117,6 @@
             0});
             this.PriceUpDown.ValueChanged += new System.EventHandler(this.PriceUpDown_ValueChanged);
             // 
-            // PictureBox
-            // 
-            this.PictureBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PictureBox.ErrorImage = global::AdminApp.Properties.Resources.item;
-            this.PictureBox.Image = global::AdminApp.Properties.Resources.item;
-            this.PictureBox.InitialImage = null;
-            this.PictureBox.Location = new System.Drawing.Point(160, 39);
-            this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(140, 140);
-            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox.TabIndex = 7;
-            this.PictureBox.TabStop = false;
-            this.PictureBox.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
-            // 
             // SaveButton
             // 
             this.SaveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -179,13 +165,40 @@
             this.AvaliableUpDown.Size = new System.Drawing.Size(87, 20);
             this.AvaliableUpDown.TabIndex = 11;
             this.AvaliableUpDown.ThousandsSeparator = true;
-            this.AvaliableUpDown.ValueChanged += new System.EventHandler(this.AvaliableUpDown_ValueChanged);
+            this.AvaliableUpDown.ValueChanged += new System.EventHandler(this.AvailableUpDown_ValueChanged);
+            // 
+            // PictureBox
+            // 
+            this.PictureBox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PictureBox.ErrorImage = global::AdminApp.Properties.Resources.item;
+            this.PictureBox.Image = global::AdminApp.Properties.Resources.item;
+            this.PictureBox.InitialImage = null;
+            this.PictureBox.Location = new System.Drawing.Point(160, 39);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(140, 140);
+            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox.TabIndex = 7;
+            this.PictureBox.TabStop = false;
+            this.PictureBox.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 116);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 25);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Prices";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(312, 191);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.AvaliableUpDown);
             this.Controls.Add(this.AvailableLabel);
             this.Controls.Add(this.ChangeImageButton);
@@ -201,10 +214,9 @@
             this.Name = "ItemForm";
             this.Text = "Item Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemForm_FormClosing);
-            this.Load += new System.EventHandler(this.ItemForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvaliableUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +237,6 @@
         private System.Windows.Forms.Label AvailableLabel;
         private System.Windows.Forms.NumericUpDown AvaliableUpDown;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button button1;
     }
 }

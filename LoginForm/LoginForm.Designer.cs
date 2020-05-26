@@ -47,7 +47,7 @@
             this.LoginBox.Size = new System.Drawing.Size(100, 21);
             this.LoginBox.TabIndex = 0;
             this.LoginBox.Text = "User_1";
-            this.LoginBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.signIn_KeyDown);
+            this.LoginBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SignIn_KeyDown);
             // 
             // loginText
             // 
@@ -78,7 +78,7 @@
             this.PasswordBox.TabIndex = 4;
             this.PasswordBox.Text = "1234";
             this.PasswordBox.UseSystemPasswordChar = true;
-            this.PasswordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.signIn_KeyDown);
+            this.PasswordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SignIn_KeyDown);
             // 
             // signIn
             // 
@@ -90,7 +90,7 @@
             this.signIn.TabIndex = 5;
             this.signIn.Text = "Sign in";
             this.signIn.UseVisualStyleBackColor = true;
-            this.signIn.Click += new System.EventHandler(this.signIn_Click);
+            this.signIn.Click += new System.EventHandler(this.SignIn_Click);
             // 
             // signUp
             // 
@@ -101,7 +101,7 @@
             this.signUp.TabIndex = 6;
             this.signUp.Text = "Sign up";
             this.signUp.UseVisualStyleBackColor = true;
-            this.signUp.Click += new System.EventHandler(this.signUp_Click);
+            this.signUp.Click += new System.EventHandler(this.SignUp_Click);
             // 
             // LoginForm
             // 

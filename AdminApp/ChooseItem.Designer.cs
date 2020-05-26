@@ -30,18 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ItemsGridVieww = new System.Windows.Forms.DataGridView();
-            this.itemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.SaveItemButton = new System.Windows.Forms.Button();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imageDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGridVieww)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemsGridVieww
@@ -53,12 +52,11 @@
             this.ItemsGridVieww.BackgroundColor = System.Drawing.SystemColors.Info;
             this.ItemsGridVieww.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ItemsGridVieww.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.unitDataGridViewTextBoxColumn,
             this.availableDataGridViewTextBoxColumn,
             this.imageDataGridViewImageColumn});
-            this.ItemsGridVieww.DataSource = this.itemBindingSource;
+            this.ItemsGridVieww.DataSource = this.itemBindingSource1;
             this.ItemsGridVieww.Location = new System.Drawing.Point(3, 3);
             this.ItemsGridVieww.MultiSelect = false;
             this.ItemsGridVieww.Name = "ItemsGridVieww";
@@ -67,10 +65,6 @@
             this.ItemsGridVieww.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGridVieww.Size = new System.Drawing.Size(288, 357);
             this.ItemsGridVieww.TabIndex = 6;
-            // 
-            // itemBindingSource
-            // 
-            this.itemBindingSource.DataSource = typeof(MyShop.Item);
             // 
             // numericUpDown1
             // 
@@ -109,13 +103,9 @@
             this.SaveItemButton.UseVisualStyleBackColor = true;
             this.SaveItemButton.Click += new System.EventHandler(this.SaveItemButton_Click);
             // 
-            // idDataGridViewTextBoxColumn
+            // itemBindingSource1
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 40;
+            this.itemBindingSource1.DataSource = typeof(MyShop.Item);
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -123,7 +113,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 57;
+            this.nameDataGridViewTextBoxColumn.Width = 96;
             // 
             // unitDataGridViewTextBoxColumn
             // 
@@ -168,8 +158,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChooseItem_FormClosing);
             this.Load += new System.EventHandler(this.ChooseItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGridVieww)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,11 +168,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView ItemsGridVieww;
-        private System.Windows.Forms.BindingSource itemBindingSource;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button SaveItemButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource itemBindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn availableDataGridViewTextBoxColumn;

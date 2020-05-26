@@ -14,18 +14,25 @@ namespace UserApp
     public partial class ChooseItem : Form
     {
         private readonly List<Item> _items;
+        private List<Portion> alreade;
         public Portion Portion;
-        public ChooseItem(List<Item> items)
+        private bool inedit;
+        private ChooseItem(List<Item> items)
         {
             InitializeComponent();
             _items = items;
         }
 
+        public ChooseItem(List<Item> items, List<Portion> portions) : this(items)
+        {
+            alreade = portions;
+        }
         public ChooseItem(Portion portion) : this(new List<Item>(){portion.Item})
         {
             Portion = portion;
             AmountUpDown.Value = portion.Amount;
             SearchItemBox.Visible = false;
+            inedit = true;
         }
 
         private void ChooseItem_Load(object sender, EventArgs e)
@@ -50,7 +57,8 @@ namespace UserApp
             foreach (var shopItem in _items)
             {
                 AddToBasket(shopItem);
-                if (!(shopItem.Available > 0 && (flag || shopItem.Name.ToLower().Contains((SearchItemBox.Text).ToLower()))))
+                
+                if ((!inedit && alreade.Select(x => x.Item.Name).Contains(shopItem.Name)) || !(shopItem.Available > 0 && (flag || shopItem.Name.ToLower().Contains((SearchItemBox.Text).ToLower()))))
                 {
                     AllItemTable.Rows[i].Visible = false;
                 }
@@ -94,5 +102,9 @@ namespace UserApp
 
         private void AmountUpDown_ValueChanged(object sender, EventArgs e) => AmountUpDown.BackColor = Color.White;
 
+        private void AllItemTable_SelectionChanged(object sender, EventArgs e)
+        {
+            AmountUpDown.Maximum = _items[AllItemTable.CurrentRow.Index].Available;
+        }
     }
 }

@@ -33,8 +33,8 @@ namespace MyShop
 
                 Copy(st.Items, shop.Items);
                 Copy(st.Users, shop.Users);
-                Copy(st.Orders, shop.Orders);
                 Copy(st.Supplies, shop.Supplies);
+                Copy(st.HistorySupplies, shop.HistorySupplies);
             }
 
             void Copy<T>(List<T> from, List<T> to)
@@ -43,6 +43,5 @@ namespace MyShop
                 to.AddRange(from);
             }
         }
-
     }
 }

@@ -47,7 +47,6 @@
     <Compile Include="Dao.cs" />
     <Compile Include="IAccount.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="Order.cs" />
     <Compile Include="Portion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop.cs" />

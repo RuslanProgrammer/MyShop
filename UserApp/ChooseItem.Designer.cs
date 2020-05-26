@@ -53,6 +53,7 @@
             this.AllItemTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AllItemTable.Size = new System.Drawing.Size(288, 334);
             this.AllItemTable.TabIndex = 0;
+            this.AllItemTable.SelectionChanged += new System.EventHandler(this.AllItemTable_SelectionChanged);
             // 
             // label1
             // 
