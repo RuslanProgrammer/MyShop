@@ -70,20 +70,36 @@ namespace MyShop
             {
                 if (Supplies[i].DateTimeEnd <= DateTime.Now)
                 {
-                    HistorySupplies.Add(Supplies[i]);
-                    foreach (var portion in Supplies[i].Portions) portion.Item.Available += portion.Amount;
+                    HistorySupplies.Add(CopySupply(Supplies[i]));
+                    foreach (var portion in Supplies[i].Portions)
+                    {
+                        portion.Item.Available += portion.Amount;
+                    }
                     Supplies.RemoveAt(i);
                     i--;
                 }
             }
         }
 
-        public void Save() => new Dao(this).Save();
+        public void Save() => 
+            new Dao(this).Save();
 
         public void Load()
         {
             new Dao(this).Load();
             UpdateSupplies();
+        }
+
+        private Supply CopySupply(Supply supplies)
+        {
+            var portions = new List<Portion>();
+            foreach (var portion in supplies.Portions)
+            {
+                Portion p = portion;
+                p.Item.Price = new List<decimal>() { portion.Item.Price[portion.Item.Price.Count - 1] };
+                portions.Add(p);
+            }
+            return new Supply(portions, supplies.DateTime);
         }
     }
 }

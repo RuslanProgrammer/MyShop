@@ -8,7 +8,7 @@ namespace MyShop
     public class Dao
     {
         private Shop shop;
-        private const string path = "shope.bin";
+        private const string path = "shop.bin";
 
         public Dao(Shop _shop)
         {

@@ -18,7 +18,7 @@ namespace AdminApp
             _items = items;
         }
 
-        public ItemForm(Item item, List<Item> items) : this(items)
+        public ItemForm(Item item, List<Item> items, List<Supply> supplies) : this(items)
         {
             Item = item;
             NameTextBox.Text = item.Name;
@@ -27,6 +27,7 @@ namespace AdminApp
             PriceUpDown.Value = item.Price[item.Price.Count - 1];
             AvaliableUpDown.Value = item.Available;
             PictureBox.Image = item.Image;
+            PriceUpDown.Enabled = supplies.Count(x => x.Portions.Any(y => y.Item.Name == item.Name)) == 0;
         }
 
         private void PictureBox_DoubleClick(object sender, System.EventArgs e) =>

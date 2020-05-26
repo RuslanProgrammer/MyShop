@@ -1,13 +1,9 @@
-﻿using System;
+﻿using MyShop;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyShop;
 
 namespace AdminApp
 {
@@ -54,7 +50,7 @@ namespace AdminApp
 
         private void CreateSupplyTable()
         {
-            var t = new DataGridViewImageColumn {ImageLayout = DataGridViewImageCellLayout.Zoom};
+            var t = new DataGridViewImageColumn { ImageLayout = DataGridViewImageCellLayout.Zoom };
             SupplyTable.Columns.Add(t);
             SupplyTable.Columns[0].HeaderText = "Img";
             SupplyTable.Columns.Add("Name", "Name");
@@ -85,9 +81,9 @@ namespace AdminApp
                             if (SupplyTable.Rows[i].Cells[1].Value.ToString() == cf.Item.Name)
                             {
                                 SupplyTable.Rows[i].Cells[2].Value =
-                                    (decimal) SupplyTable.Rows[i].Cells[2].Value + cf.Amount;
+                                    (decimal)SupplyTable.Rows[i].Cells[2].Value + cf.Amount;
                                 SupplyTable.Rows[i].Cells[4].Value =
-                                    (decimal) SupplyTable.Rows[i].Cells[4].Value +
+                                    (decimal)SupplyTable.Rows[i].Cells[4].Value +
                                     cf.Amount * cf.Item.Price[cf.Item.Price.Count - 1];
                                 break;
                             }
@@ -98,7 +94,7 @@ namespace AdminApp
 
                 if (flag)
                 {
-                    Supply.Portions.Add(new Portion() {Amount = cf.Amount, Item = cf.Item});
+                    Supply.Portions.Add(new Portion() { Amount = cf.Amount, Item = cf.Item });
                     var price = cf.Item.Price[cf.Item.Price.Count - 1];
                     decimal cost = cf.Amount * price;
                     SupplyTable.Rows.Add(cf.Item.Image, cf.Item.Name, cf.Amount, price, cost);
@@ -147,7 +143,7 @@ namespace AdminApp
             {
                 if (item.Available < 500)
                 {
-                    Supply.Portions.Add(new Portion() {Amount = 500 - item.Available, Item = item});
+                    Supply.Portions.Add(new Portion() { Amount = 500 - item.Available, Item = item });
                     SupplyTable.Rows.Add(item.Image, item.Name, 500 - item.Available, item.Price[item.Price.Count - 1], item.Price[item.Price.Count - 1] * 500 - item.Available);
                     TotalLabe.Text = Math.Round(Decimal.Parse(TotalLabe.Text) + (500 - item.Available) * item.Price[item.Price.Count - 1], 3).ToString();
                 }

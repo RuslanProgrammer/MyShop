@@ -113,7 +113,7 @@ namespace AdminApp
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var itemForm = new ItemForm(ItemsGridView.SelectedRows[0].DataBoundItem as Item, _shop.Items);
+            var itemForm = new ItemForm(ItemsGridView.SelectedRows[0].DataBoundItem as Item, _shop.Items, _shop.Supplies);
             if (itemForm.ShowDialog() == DialogResult.OK)
             {
                 itemBindingSource.ResetBindings(false);
