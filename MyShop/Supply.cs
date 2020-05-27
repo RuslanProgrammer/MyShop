@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MyShop
 {
+    // Supply: Portion + Order Time + Lead Time.
     [Serializable]
     public class Supply
     {

@@ -286,7 +286,7 @@ namespace AdminApp
                         {
                             wr.WriteLine($"{shopUser.Name} ({shopUser.Password}):");
                             foreach (var portion in shopUser.History)
-                                wr.WriteLine($"    {portion.Item.Name}, {portion.Amount}");
+                                wr.WriteLine($"    {portion.Item.Name}, {portion.Amount} {portion.Item.Unit}");
                         }
                     }
                 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MyShop
 {
+    // User: Name + Password + History + Basket.
     [Serializable]
-    public class User : IAccount
+    public class User
     {
         public User(string name, string password)
         {

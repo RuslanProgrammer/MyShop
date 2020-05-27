@@ -2,6 +2,7 @@
 
 namespace MyShop
 {
+    // Portion: Amount + Item.
     [Serializable]
     public class Portion
     {

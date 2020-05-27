@@ -4,6 +4,8 @@ using System.Drawing;
 
 namespace MyShop
 {
+    // Item: Name + Unit + Image + Price + Available.
+    // Class to create new Item.
     [Serializable]
     public class Item
     {

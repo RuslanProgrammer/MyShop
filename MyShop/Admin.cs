@@ -2,6 +2,7 @@
 
 namespace MyShop
 {
+    // Admin: Name + Password.
     [Serializable]
     public class Admin
     {

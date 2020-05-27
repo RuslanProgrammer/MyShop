@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MyShop
 {
+    // Data Access Object to provide access to ROM.
     public class Dao
     {
         private Shop shop;

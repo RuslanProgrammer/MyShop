@@ -6,6 +6,7 @@ using System.IO;
 
 namespace MyShop
 {
+    // Shop: Items + Users  + User's Orders + Supplies + History of Supplies.
     [Serializable]
     public class Shop
     {
@@ -56,13 +57,17 @@ namespace MyShop
             UpdateSupplies();
         }
 
-        public void AddUser(User user) => Users.Add(user);
+        public void AddUser(User user) => 
+            Users.Add(user);
 
-        public void AddItem(Item item) => Items.Add(item);
+        public void AddItem(Item item) => 
+            Items.Add(item);
 
-        public void AddSupply(Supply supply) => Supplies.Add(supply);
+        public void AddSupply(Supply supply) => 
+            Supplies.Add(supply);
 
-        public void AddSupplyFirst(Supply supply) => Supplies.Insert(0, supply);
+        public void AddSupplyFirst(Supply supply) => 
+            Supplies.Insert(0, supply);
 
         public void UpdateSupplies()
         {

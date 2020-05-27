@@ -52,6 +52,7 @@ namespace LoginForm
         {
             if (LoginBox.Text == Shop.Admin.Name && PasswordBox.Text == Shop.Admin.Password)
             {
+                LoginBox.BackColor = Color.White;
                 var adminApp = new AdminForm(Shop);
                 this.Hide();
                 adminApp.ShowDialog();

@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Dao.cs" />
-    <Compile Include="IAccount.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Portion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
