@@ -43,6 +43,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.DateOfSupply = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PriceUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvaliableUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
@@ -61,7 +63,7 @@
             // 
             this.NameTextBox.Location = new System.Drawing.Point(67, 12);
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(233, 20);
+            this.NameTextBox.Size = new System.Drawing.Size(87, 20);
             this.NameTextBox.TabIndex = 2;
             this.NameTextBox.Text = "Product";
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
@@ -193,11 +195,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(154, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Last suplly:";
+            // 
+            // DateOfSupply
+            // 
+            this.DateOfSupply.AutoSize = true;
+            this.DateOfSupply.BackColor = System.Drawing.SystemColors.Control;
+            this.DateOfSupply.Location = new System.Drawing.Point(208, 15);
+            this.DateOfSupply.Name = "DateOfSupply";
+            this.DateOfSupply.Size = new System.Drawing.Size(38, 13);
+            this.DateOfSupply.TabIndex = 14;
+            this.DateOfSupply.Text = "No yet";
+            // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(312, 191);
+            this.Controls.Add(this.DateOfSupply);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AvaliableUpDown);
             this.Controls.Add(this.AvailableLabel);
@@ -238,5 +261,7 @@
         private System.Windows.Forms.NumericUpDown AvaliableUpDown;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label DateOfSupply;
     }
 }

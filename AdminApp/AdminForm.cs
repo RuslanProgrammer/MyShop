@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Design;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -91,10 +92,19 @@ namespace AdminApp
             _isChanged = false;
         }
 
-        private void ItemToolStripMenuItem_Click(object sender, EventArgs e) =>
+        private void ItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             editToolStripMenuItem.Enabled =
                 deleteToolStripMenuItem.Enabled =
                     ItemsGridView.SelectedRows.Count > 0;
+            CheckItemInSupply();
+        }
+
+        private void CheckItemInSupply() =>
+            deleteToolStripMenuItem.Enabled = _shop.Supplies.Count(x =>
+                x.Portions.Any(y =>
+                    ItemsGridView.CurrentRow != null && y.Item.Name == ItemsGridView.CurrentRow.Cells[0].Value
+                        .ToString())) == 0;
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -113,7 +123,7 @@ namespace AdminApp
 
         private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var itemForm = new ItemForm(ItemsGridView.SelectedRows[0].DataBoundItem as Item, _shop.Items, _shop.Supplies);
+            var itemForm = new ItemForm(ItemsGridView.SelectedRows[0].DataBoundItem as Item, _shop.Items, _shop.Supplies, _shop.HistorySupplies);
             if (itemForm.ShowDialog() == DialogResult.OK)
             {
                 itemBindingSource.ResetBindings(false);

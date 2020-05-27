@@ -18,7 +18,7 @@ namespace AdminApp
             _items = items;
         }
 
-        public ItemForm(Item item, List<Item> items, List<Supply> supplies) : this(items)
+        public ItemForm(Item item, List<Item> items, List<Supply> supplies, List<Supply> oldSupplies) : this(items)
         {
             Item = item;
             NameTextBox.Text = item.Name;
@@ -28,6 +28,27 @@ namespace AdminApp
             AvaliableUpDown.Value = item.Available;
             PictureBox.Image = item.Image;
             PriceUpDown.Enabled = supplies.Count(x => x.Portions.Any(y => y.Item.Name == item.Name)) == 0;
+            CheckLastDateOfSupply(supplies, oldSupplies, item.Name);
+        }
+
+        private void CheckLastDateOfSupply(List<Supply> a, List<Supply> b, string Name)
+        {
+            foreach (var Supply in a)
+            {
+                if (Supply.Portions.Any(portion => portion.Item.Name == Name))
+                {
+                    DateOfSupply.Text = Supply.DateTimeEnd.ToString();
+                    return;
+                }
+            }
+            foreach (var Supply in b)
+            {
+                if (Supply.Portions.Any(portion => portion.Item.Name == Name))
+                {
+                    DateOfSupply.Text = Supply.DateTimeEnd.ToString();
+                    return;
+                }
+            }
         }
 
         private void PictureBox_DoubleClick(object sender, System.EventArgs e) =>
