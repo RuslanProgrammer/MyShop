@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Design;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,7 +21,7 @@ namespace AdminApp
             _shop = shop;
             itemBindingSource.DataSource = shop.Items;
             foreach (var shopSupply in shop.Supplies)
-                _supplyList.Add(new {shopSupply.DateTimeEnd, shopSupply.Portions.Count });
+                _supplyList.Add(new { shopSupply.DateTimeEnd, shopSupply.Portions.Count });
             foreach (var shopSupply in shop.HistorySupplies)
                 _supplyList.Add(new { shopSupply.DateTimeEnd, shopSupply.Portions.Count });
             supplyBindingSource.DataSource = _supplyList;
@@ -259,48 +258,67 @@ namespace AdminApp
                     using (var wr = new StreamWriter(Path.Combine(dialog.SelectedPath, $"MyShop.txt"), false))
                     {
                         wr.WriteLine($"Report from {DateTime.Now}");
+
                         wr.WriteLine($"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nAvailable items:");
-                        foreach (var item in _shop.Items)
-                        {
-                            var tprice = "";
-                            for(int i = 0; i < item.Price.Count - 1; i++)
-                                tprice += $"{item.Price[i]}, ";
-                            tprice += item.Price[item.Price.Count - 1];
-                            wr.WriteLine(
-                                $"{item.Name}:\n    " +
-                                $"Prices: {tprice}\n    " +
-                                $"Available: {item.Available}\n    " +
-                                $"Unit: {item.Unit}\n    " +
-                                $"Sold: {item.Sold}");
-                        }
+                        wr.WriteLine(ReportItems());
 
                         wr.WriteLine($"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSupplies:\n");
                         wr.WriteLine("Not done yet:");
-                        foreach (var supply in _shop.Supplies)
-                        {
-                            wr.WriteLine($"Order to {supply.DateTimeEnd}:");
-                            foreach (var supplyPortion in supply.Portions)
-                                wr.WriteLine($"    {supplyPortion.Item}, {supplyPortion.Amount}");
-                        }
-
-                        wr.WriteLine("\nDone:");
-                        foreach (var supply in _shop.HistorySupplies)
-                        {
-                            wr.WriteLine($"Order to {supply.DateTimeEnd}:");
-                            foreach (var supplyPortion in supply.Portions)
-                                wr.WriteLine($"    {supplyPortion.Item.Name}, {supplyPortion.Amount}");
-                        }
+                        wr.WriteLine(ReportOrders(_shop.Supplies));
+                        wr.WriteLine("Done:");
+                        wr.WriteLine(ReportOrders(_shop.HistorySupplies));
 
                         wr.WriteLine($"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nUsers:");
-                        foreach (var shopUser in _shop.Users)
-                        {
-                            wr.WriteLine($"{shopUser.Name} ({shopUser.Password}):");
-                            foreach (var portion in shopUser.History)
-                                wr.WriteLine($"    {portion.Item.Name}, {portion.Amount} {portion.Item.Unit}");
-                        }
+                        wr.WriteLine(ReportUsers());
                     }
                 }
             }
+        }
+
+        private string ReportItems()
+        {
+            var res = "";
+            decimal totalPrice = 0;
+            foreach (var item in _shop.Items)
+            {
+                var tPrice = "";
+                for (int i = 0; i < item.Price.Count - 1; i++)
+                    tPrice += $"{item.Price[i]}, ";
+                tPrice += item.Price[item.Price.Count - 1];
+                res +=
+                    $"{item.Name}:\n    " +
+                    $"Prices: {tPrice}\n    " +
+                    $"Available: {item.Available}\n    " +
+                    $"Unit: {item.Unit}\n    " +
+                    $"Sold: {item.Sold}\n";
+                totalPrice += item.Price[item.Price.Count - 1];
+            }
+
+            return res.Length == 0 ? "No items\n" : res + $"\nTotal: {totalPrice}";
+        }
+
+        private string ReportOrders(List<Supply> supplies)
+        {
+            var res = "";
+            foreach (var supply in supplies)
+            {
+                res += $"Order to {supply.DateTimeEnd}:\n";
+                res = supply.Portions.Aggregate(res, (current, supplyPortion) => current + $"    {supplyPortion.Item}, {supplyPortion.Amount} {supplyPortion.Item.Unit}\n");
+            }
+
+            return res.Length == 0 ? "No supplies\n" : res;
+        }
+
+        private string ReportUsers()
+        {
+            var res = "";
+            foreach (var shopUser in _shop.Users)
+            {
+                res += $"{shopUser.Name} ({shopUser.Password}):\n";
+                res = shopUser.History.Aggregate(res, (current, portion) => current + $"    {portion.Item.Name}, {portion.Amount} {portion.Item.Unit}\n");
+            }
+
+            return res.Length == 0 ? "No users\n" : res;
         }
     }
 }
