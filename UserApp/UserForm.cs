@@ -17,17 +17,18 @@ namespace UserApp
         public Shop Shop;
         public bool ToLogin;
         public User CurUser;
-        private bool IsChanged;
-        private List<Portion> history = new List<Portion>();
-        private List<Portion> basket = new List<Portion>();
+        private bool _isChanged;
+        private List<Portion> _history;
+        private List<Portion> _basket;
+
         public UserForm(Shop shop, User user)
         {
             Shop = shop;
             CurUser = user;
             InitializeComponent();
-            history = user.History;
-            history.Reverse();
-            basket = user.Basket;
+            _history = user.History;
+            _history.Reverse();
+            _basket = user.Basket;
                     
         }
 
@@ -53,7 +54,7 @@ namespace UserApp
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!IsChanged)
+            if (!_isChanged)
                 return;
             var res = MessageBox.Show("Save data before exit?", "", MessageBoxButtons.YesNoCancel);
             if (res == DialogResult.Cancel)
@@ -76,7 +77,7 @@ namespace UserApp
 
         private void FillItemTable(bool flag = true)
         {
-            foreach (var portion in basket)
+            foreach (var portion in _basket)
             {
                 if ((flag || portion.Item.Name.ToLower().Contains((SearchItemBox.Text).ToLower())))
                 {
@@ -103,13 +104,13 @@ namespace UserApp
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var itemform = new ChooseItem(Shop.Items, basket);
+            var itemform = new ChooseItem(Shop.Items, _basket);
             if (itemform.ShowDialog() == DialogResult.OK)
             {
-                basket.Add(itemform.Portion);
+                _basket.Add(itemform.Portion);
                 AddToBasket(itemform.Portion, ItemsGridView);
 
-                IsChanged = true;
+                _isChanged = true;
 
                 var ind = ItemsGridView.Rows.Count - 1;
                 ItemsGridView.Rows[ind].Selected = true;
@@ -119,10 +120,10 @@ namespace UserApp
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var itemform = new ChooseItem(basket[ItemsGridView.CurrentRow.Index]);
+            var itemform = new ChooseItem(_basket[ItemsGridView.CurrentRow.Index]);
             if (itemform.ShowDialog() == DialogResult.OK)
             {
-                IsChanged = true;
+                _isChanged = true;
             }
         }
 
@@ -132,15 +133,15 @@ namespace UserApp
             var ask = MessageBox.Show($"Delete {del} ?", "", MessageBoxButtons.YesNo);
             if (ask == DialogResult.Yes)
             {
-                basket.Remove(basket[ItemsGridView.CurrentRow.Index]);
+                _basket.Remove(_basket[ItemsGridView.CurrentRow.Index]);
                 ItemsGridView.Rows.RemoveAt(ItemsGridView.CurrentRow.Index);
-                IsChanged = true;
+                _isChanged = true;
             }
         }
 
         private void FillHistoryTable()
         {
-            foreach (var portion in history)
+            foreach (var portion in _history)
             {
                 AddToBasket(portion, HistoryGridView);
             }
@@ -164,14 +165,14 @@ namespace UserApp
 
         private void Finishbutton_Click(object sender, EventArgs e)
         {
-            if (basket.Count == 0)
+            if (_basket.Count == 0)
                 MessageBox.Show($"You haven't ordered anything yet");
             else
             {
                 var res = MessageBox.Show("That's all?", "", MessageBoxButtons.YesNoCancel);
                 if (res == DialogResult.Yes)
                 {
-                    foreach (var portion in basket)
+                    foreach (var portion in _basket)
                     {
                         foreach (var shopItem in Shop.Items)
                         {
@@ -183,15 +184,15 @@ namespace UserApp
                         }
                     }
                     string str = "Your order:\n\n";
-                    foreach (var portion in basket)
+                    foreach (var portion in _basket)
                     {
                         str += $"{portion.Item.Name} × {portion.Amount}\n";
                     }
                     MessageBox.Show(str);
-                    CurUser.History.AddRange(basket);
+                    CurUser.History.AddRange(_basket);
                     CurUser.Basket.Clear();
                     Shop.Save();
-                    IsChanged = false;
+                    _isChanged = false;
                     Close();
                 }
             }

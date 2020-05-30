@@ -31,23 +31,18 @@ namespace AdminApp
             CheckLastDateOfSupply(supplies, oldSupplies, item.Name);
         }
 
-        private void CheckLastDateOfSupply(List<Supply> a, List<Supply> b, string Name)
+        private void CheckLastDateOfSupply(List<Supply> a, List<Supply> b, string name)
         {
-            foreach (var Supply in a)
+            foreach (var Supply in a.Where(Supply => Supply.Portions.Any(portion => portion.Item.Name == name)))
             {
-                if (Supply.Portions.Any(portion => portion.Item.Name == Name))
-                {
-                    DateOfSupply.Text = Supply.DateTimeEnd.ToString();
-                    return;
-                }
+                DateOfSupply.Text = Supply.DateTimeEnd.ToString();
+                return;
             }
-            foreach (var Supply in b)
+
+            foreach (var Supply in b.Where(Supply => Supply.Portions.Any(portion => portion.Item.Name == name)))
             {
-                if (Supply.Portions.Any(portion => portion.Item.Name == Name))
-                {
-                    DateOfSupply.Text = Supply.DateTimeEnd.ToString();
-                    return;
-                }
+                DateOfSupply.Text = Supply.DateTimeEnd.ToString();
+                return;
             }
         }
 
@@ -138,6 +133,7 @@ namespace AdminApp
         private void button1_Click(object sender, EventArgs e)
         {
             if (Item != null) new ChartP(Item.Price).ShowDialog();
+            else button1.Enabled = false;
         }
     }
 }

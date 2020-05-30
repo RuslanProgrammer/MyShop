@@ -38,7 +38,7 @@ namespace MyShop
             var defImg = new Bitmap(Path.GetFullPath("item.png"));
             for (int i = 0; i < n; i++)
             {
-                Items.Add(new Item($"Product_{i}", ((Unit)(i % 2)).ToString(), i + 1, 10000, defImg));
+                Items.Add(new Item($"Product_{i}", i % 2 == 0 ? "l" : "kg", i + 1, 10000, defImg));
                 Users.Add(new User($"User_{i}", "1234"));
             }
 
@@ -62,9 +62,6 @@ namespace MyShop
 
         public void AddItem(Item item) => 
             Items.Add(item);
-
-        public void AddSupply(Supply supply) => 
-            Supplies.Add(supply);
 
         public void AddSupplyFirst(Supply supply) => 
             Supplies.Insert(0, supply);
