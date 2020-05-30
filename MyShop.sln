@@ -12,10 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserApp", "UserApp\UserApp.csproj", "{29B3AB6E-12F6-49C5-AFDF-3D78D0A92A9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{7433A009-58FC-469D-9355-7A45AF86D367}"
-	ProjectSection(SolutionItems) = preProject
-		D:\Ruslan\2 sem\Курсовая\Кашепаров_ПЗПИ-19-4_записка.docx = D:\Ruslan\2 sem\Курсовая\Кашепаров_ПЗПИ-19-4_записка.docx
-		D:\Ruslan\2 sem\Курсовая\Кашепаров_ПЗПИ-19-4_записка.pdf = D:\Ruslan\2 sem\Курсовая\Кашепаров_ПЗПИ-19-4_записка.pdf
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
